@@ -1,11 +1,11 @@
-'use client';
-
-import { useState, useEffect } from 'react';
+import Jobs from '@/components/Jobs';
 
 export default function Page() {
     return (
         <>
-            <div></div>
+            <div className='w-100 bg-black min-h-[100vh] flex justify-center items-center'>
+                <Jobs />
+            </div>
         </>
     );
 }
