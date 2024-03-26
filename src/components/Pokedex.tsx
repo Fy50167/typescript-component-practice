@@ -32,22 +32,19 @@ const Pokedex = () => {
                 `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`
             );
             const data = await res.json();
-            console.log(data);
-            return data;
+            setCurrentPokemon(data);
         } catch (error: any) {
             throw new Error(error);
         }
     };
 
-    getPokemonList();
+    useEffect(() => {
+        getPokemonData();
+    }, [pokemonIndex]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const pokemonData = await getPokemonData();
-            setCurrentPokemon(pokemonData);
-        };
-        fetchData();
-    }, [pokemonIndex]);
+        getPokemonList();
+    }, []);
 
     return (
         <section className='w-[90%] flex flex-col items-center justify-between py-4 px-8 bg-white rounded-md'>
@@ -60,14 +57,11 @@ const Pokedex = () => {
             </select>
 
             <div className='flex flex-col justify-evenly items-start'>
-                <Image
-                    alt='pokemon sprite'
-                    className='object-cotain'
-                    width={100}
-                    height={100}
-                    src={currentPokemon.sprites.front_default}
-                />
-                {currentPokemon.name}
+                {currentPokemon ? (
+                    <p>{currentPokemon.name}</p>
+                ) : (
+                    <p>Loading...</p>
+                )}
             </div>
         </section>
     );
