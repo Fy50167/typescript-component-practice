@@ -13,7 +13,7 @@ const Jobs = () => {
             const res = await fetch(
                 `https://hacker-news.firebaseio.com/v0/jobstories.json`
             );
-            const jobIds = res.json();
+            const jobIds = await res.json();
             return jobIds;
         } catch (error: any) {
             throw new Error(error);
