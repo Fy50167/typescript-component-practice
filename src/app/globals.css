@@ -20,7 +20,3 @@
 .yellow {
     background-color: yellow;
 }
-
-.image {
-    transition: translate 300ms ease-in-out;
-}

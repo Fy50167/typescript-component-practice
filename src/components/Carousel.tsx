@@ -50,7 +50,7 @@ const ImageCarousel = ({
                         alt={item.alt}
                         width={600}
                         height={400}
-                        className={`rounded-md w-full h-full image`}
+                        className={`rounded-md w-full h-full image transition-${transitionDuration} transition-all ease-in-out`}
                         key={item.alt}
                         style={{
                             translate: `${-100 * (slide - 1)}%`,
