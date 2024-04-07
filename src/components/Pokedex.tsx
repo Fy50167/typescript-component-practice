@@ -10,7 +10,7 @@ interface pokemonName {
 }
 
 const Pokedex = () => {
-    const [pokemonList, setPokemonList] = useState<pokemonName[]>([]);
+    const [pokemonList, setPokemonList] = useState<pokemonName[] | []>([]);
     const [pokemonIndex, setPokemonIndex] = useState<number>(1);
     const [currentPokemon, setCurrentPokemon] = useState<any>();
 
