@@ -1,13 +1,22 @@
-import Carousel from '@/components/Carousel';
+import ImageCarousel from '@/components/Carousel';
 
 export default function Page() {
     return (
-        <div>
+        <div className='w-100 bg-black min-h-[100vh] flex justify-center items-center'>
             <ImageCarousel
                 images={[
-                    { src: 'https://example.com/images/foo.jpg', alt: 'A foo' },
-                    { src: 'https://example.com/images/bar.jpg', alt: 'A bar' },
-                    /* More images if desired. */
+                    {
+                        src: 'https://picsum.photos/seed/picsum1/600/400',
+                        alt: 'image 1',
+                    },
+                    {
+                        src: 'https://picsum.photos/seed/picsum2/600/400',
+                        alt: 'image 2',
+                    },
+                    {
+                        src: 'https://picsum.photos/seed/picsum3/600/400',
+                        alt: 'image 3',
+                    },
                 ]}
                 transitionDuration={300}
                 height={500}
