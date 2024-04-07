@@ -32,6 +32,10 @@ const ImageCarousel = ({
         );
     };
 
+    const indicatorSet = (index: number) => {
+        setSlide(index);
+    };
+
     return (
         <div className='flex justify-center items-center w-[600px] h-auto relative overflow-hidden'>
             <BsArrowLeftCircleFill
@@ -44,7 +48,6 @@ const ImageCarousel = ({
                         src={item.src}
                         alt={item.alt}
                         width={600}
-                        layout='fixed'
                         height={400}
                         className={`rounded-md w-full h-full ${
                             slide === index ? '' : 'hidden'
@@ -61,8 +64,11 @@ const ImageCarousel = ({
                 {images.map((_, index) => {
                     return (
                         <button
+                            onClick={() => indicatorSet(index)}
                             key={index}
-                            className='w-[10px] h-[10px] rounded-full bg-white'
+                            className={`w-[10px] h-[10px] rounded-full bg-white ${
+                                slide === index ? 'bg-slate-700' : ''
+                            }`}
                         ></button>
                     );
                 })}
