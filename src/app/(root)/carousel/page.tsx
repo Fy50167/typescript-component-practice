@@ -2,7 +2,7 @@ import ImageCarousel from '@/components/Carousel';
 
 export default function Page() {
     return (
-        <div className='w-100 bg-black min-h-[100vh] flex justify-center items-center'>
+        <div className='w-full bg-black min-h-[100vh] flex justify-center items-center'>
             <ImageCarousel
                 images={[
                     {
