@@ -20,3 +20,7 @@
 .yellow {
     background-color: yellow;
 }
+
+.modal-background {
+    background-color: rgba(128, 128, 128, 0.2);
+}
