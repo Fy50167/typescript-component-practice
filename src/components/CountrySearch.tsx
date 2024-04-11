@@ -26,25 +26,33 @@ interface Country {
 const CountrySearch = () => {
     const [countryData, setCountryData] = useState<Country[]>([]);
     const [filter, setFilter] = useState<string>('None');
+    const [loading, setLoading] = useState<boolean>(false);
 
     const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        console.log(e.target.value);
         setFilter(e.target.value);
     };
 
     useEffect(() => {
         const fetchCountryData = async () => {
-            if (filter === 'None') {
-                const response = await fetch(`${BASE_URL}/all`);
-                const res = await response.json();
-                setCountryData(res);
-            } else {
-                const response = await fetch(`${BASE_URL}/capital/${filter}`);
-                const res = await response.json();
-                setCountryData(res);
+            try {
+                setLoading(true);
+                if (filter === 'None') {
+                    const response = await fetch(`${BASE_URL}/all`);
+                    const res = await response.json();
+                    setCountryData(res);
+                } else {
+                    const response = await fetch(
+                        `${BASE_URL}/capital/${filter}`
+                    );
+                    const res = await response.json();
+                    setCountryData(res);
+                }
+            } catch (error: any) {
+                console.error(error);
+            } finally {
+                setLoading(false);
             }
         };
-
         fetchCountryData();
     }, [filter]);
     return (
@@ -56,24 +64,31 @@ const CountrySearch = () => {
                     </option>
                 ))}
             </select>
+
             <div className='bg-white w-[90%] max-h-[45rem] rounded-md overflow-auto p-4'>
-                {countryData.map((country, index) => {
-                    return (
-                        <div
-                            key={country.name.common}
-                            className={`w-full p-2 border-2 border-solid border-black flex flex-col items-start justify-evenly ${
-                                index !== countryData.length - 1 ? 'mb-2' : ''
-                            }`}
-                        >
-                            <h2 className='font-bold text-xl'>
-                                Name: {country.name.common}
-                            </h2>
-                            <p className='text-sm'>
-                                Capital: {country.capital}
-                            </p>
-                        </div>
-                    );
-                })}
+                {loading ? (
+                    <p>Loading...</p>
+                ) : (
+                    countryData.map((country, index) => {
+                        return (
+                            <div
+                                key={country.name.common}
+                                className={`w-full p-2 border-2 border-solid border-black flex flex-col items-start justify-evenly ${
+                                    index !== countryData.length - 1
+                                        ? 'mb-2'
+                                        : ''
+                                }`}
+                            >
+                                <h2 className='font-bold text-xl'>
+                                    Name: {country.name.common}
+                                </h2>
+                                <p className='text-sm'>
+                                    Capital: {country.capital}
+                                </p>
+                            </div>
+                        );
+                    })
+                )}
             </div>
         </>
     );
